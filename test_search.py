@@ -18,7 +18,9 @@ def test_basic_search(init_driver):
 
     # Verificar que la busqueda fue exitosa obteniendo el texto del elemento
     first_element = init_driver.find_element(By.XPATH, "(//div[@class='yuRUbf']/a/h3)[1]")
-    assert "Tarjetas de Video - SP Digital.cl" == first_element.text
+    first_element_text = (first_element.text).lower()
+
+    assert first_element_text.startswith("tarjeta")
 
     # Buscar elemento y hacer click en el
     first_link = init_driver.find_element(By.XPATH, "(//div[@class='yuRUbf']/a/h3)[1]")
