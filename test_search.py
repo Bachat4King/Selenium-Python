@@ -30,17 +30,21 @@ def test_basic_search_amazon(init_driver):
 
     search_bar = wait.until(EC.visibility_of_element_located((By.ID, "twotabsearchtextbox")))
     search_bar.send_keys("iphone")
+
     search_button = wait.until(EC.element_to_be_clickable((By.ID, "nav-search-submit-button")))
     search_button.click()
 
     price = wait.until(EC.visibility_of_element_located((By.XPATH, "(//span[@class='a-price'])[2]")))
     price_text = price.text.replace("\n", ".")
 
-    first_element = wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='a-section a-spacing-none']/h2/a/span)[2]")))
-    first_element.click()
+    second_element = wait.until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='a-size-medium a-color-base a-text-normal'])[2]")))
+    second_element.click()
 
     price_in_product = wait.until(EC.visibility_of_element_located((By.ID, "priceblock_ourprice")))
     price_in_product_text = price_in_product.text
 
     assert price_text == price_in_product_text
+
+
+
 
