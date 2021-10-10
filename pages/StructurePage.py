@@ -1,4 +1,3 @@
-import time
 
 from selenium.webdriver.common.by import By
 
@@ -42,5 +41,4 @@ class StructurePage(BasePage):
 
         self.do_click(self.edit_button)
         self.do_click(self.remove_button)
-        time.sleep(3)
         self.do_click(self.confirm_button)
