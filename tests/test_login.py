@@ -21,5 +21,5 @@ def test_login_orange(init_driver, section, credentials):
     structurepage = StructurePage(init_driver)
     structurepage.add_engineering_section(section["id"], section["name"], section["description"])
 
-    assert structurepage.get_element() == "123 : Cloud"
-
+    assert structurepage.get_element() == section["id"] + " : " + section["name"]
+    structurepage.remove_last_element()
