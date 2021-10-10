@@ -1,12 +1,20 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from conftest import load_data
+
+# data
+
+data = load_data("/Users/bastian.silva/Desktop/Python/ConfiguracionInicial/data/AmazonData.json")
 
 # Tests
 def test_basic_search(init_driver):
     init_driver.get("https://www.google.com/")
+
+    wait = WebDriverWait(init_driver, 10)
 
     google_search_bar = init_driver.find_element(By.NAME, "q")
     google_search_bar.send_keys("Tarjeta De Video" + Keys.RETURN)
@@ -14,7 +22,7 @@ def test_basic_search(init_driver):
     search_bar = init_driver.find_element(By.NAME, "q")
     search_bar.clear()
 
-    first_element = init_driver.find_element(By.XPATH, "(//div[@class='yuRUbf']/a/h3)[1]")
+    first_element = wait.until(EC.visibility_of_element_located((By.XPATH, "(//div[@class='yuRUbf']/a/h3)[1]")))
     first_element_text = first_element.text.lower()
 
     assert first_element_text.startswith("tarjeta")
@@ -22,14 +30,14 @@ def test_basic_search(init_driver):
     first_link = init_driver.find_element(By.XPATH, "(//div[@class='yuRUbf']/a/h3)[1]")
     first_link.click()
 
-
-def test_basic_search_amazon(init_driver):
+@pytest.mark.parametrize('entrada', data["AmazonInput"])
+def test_basic_search_amazon(init_driver, entrada):
     init_driver.get("https://www.amazon.com/")
 
     wait = WebDriverWait(init_driver, 10)
 
     search_bar = wait.until(EC.visibility_of_element_located((By.ID, "twotabsearchtextbox")))
-    search_bar.send_keys("iphone")
+    search_bar.send_keys(entrada)
 
     search_button = wait.until(EC.element_to_be_clickable((By.ID, "nav-search-submit-button")))
     search_button.click()
