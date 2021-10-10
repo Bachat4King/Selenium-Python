@@ -1,10 +1,11 @@
 {
   "Credentials": [{"user": "Admin",
-                  "password": "admin123"},
-                  {"user":  "Admin",
-                  "password": "password"}],
+                  "password": "admin123"}],
 
   "Section": [{"id": "123",
               "name": "Cloud",
-              "description": "GoogleCloud"}]
+              "description": "GoogleCloud"},
+              {"id": "1234",
+              "name": "Quality Control",
+              "description": "QC"}]
 }
