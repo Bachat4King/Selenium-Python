@@ -1,0 +1,10 @@
+{
+  "Credentials": [{"user": "Admin",
+                  "password": "admin123"},
+                  {"user":  "Admin",
+                  "password": "password"}],
+
+  "Section": [{"id": "123",
+              "name": "Cloud",
+              "description": "GoogleCloud"}]
+}
